@@ -93,7 +93,11 @@ function inputRange(masterElement) {
       "left": (left - sw) + "px",
     });
   }
-  moveSlider();
+  function updateInputRange() {
+    elementOverlap(delegateElement, masterElement);
+    moveSlider();
+  }
+  updateInputRange();
   function changeValue(event) {
     var x = event.clientX - delegateElement.clientLeft - delegateElement.offsetLeft;
     var sw = 0.5 * sliderElement.offsetWidth;
@@ -118,13 +122,13 @@ function inputRange(masterElement) {
   delegateElement.addEventListener("mousedown", function(event) {
     masterElement.focus();
     changeValue(event);
-    moveSlider();
+    updateInputRange();
     mousedown = true;
   }, false);
   document.addEventListener("mousemove", function(event) {
     if (mousedown) {
       changeValue(event);
-      moveSlider();
+      updateInputRange();
     }
   }, false);
   document.addEventListener("mouseup", function(event) {
@@ -132,14 +136,14 @@ function inputRange(masterElement) {
   }, false);
   masterElement.addEventListener("focus", function(event) {
     delegateElement.style.border = "solid thin orange";
-    elementOverlap(delegateElement, masterElement);
-    moveSlider();
+    updateInputRange();
   }, false);
   masterElement.addEventListener("blur", function(event) {
     delegateElement.style.border = "none";
-    elementOverlap(delegateElement, masterElement);
-    moveSlider();
+    updateInputRange();
+    mousedown = false;
   }, false);
+  window.addEventListener("resize", updateInputRange, false);
 }
 
 function onload() {
