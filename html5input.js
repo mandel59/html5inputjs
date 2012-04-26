@@ -68,20 +68,20 @@ function inputRange(masterElement) {
   var minNum = masterElement.min ? parseFloat(masterElement.min) : 0;
   var maxNum = masterElement.max ? parseFloat(masterElement.max) : 100;
   masterElement.value = roundValue((minNum + maxNum) / 2);
-  elementOverlap(delegateElement, masterElement);
   setMembers(sliderElement.style, {
-    "backgroundColor": "black",
+    "backgroundColor": "#ccc",
+    "border": "solid thin #999",
   });
-
   function moveSlider() {
     var value = parseFloat(masterElement.value);
     var minNum = masterElement.min ? parseFloat(masterElement.min) : 0;
     var maxNum = masterElement.max ? parseFloat(masterElement.max) : 100;
     var croppedValue = Math.min(maxNum, Math.max(minNum, value));
     var rate = (croppedValue - minNum) / (maxNum - minNum);
+    var sliderSize = 0.875 * delegateElement.clientHeight;
     setMembers(sliderElement.style, {
-      "height": (delegateElement.clientHeight * 0.875) + "px",
-      "width": (delegateElement.clientHeight * 0.4375) + "px",
+      "height": sliderSize + "px",
+      "width": (0.5 * sliderSize) + "px",
     });
     var sh = 0.5 * sliderElement.offsetHeight;
     var sw = 0.5 * sliderElement.offsetWidth;
