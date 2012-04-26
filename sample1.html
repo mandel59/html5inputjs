@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>html5input.js sample1</title>
+<script src="html5input.js"></script>
+</head>
+<body>
+<input id="rangeH" type="range" min="0" max="360" step="1"/>
+<input id="rangeS" type="range" min="0" max="100" step="1"/>
+<input id="rangeL" type="range" min="0" max="100" step="1"/>
+<script>
+window.addEventListener("load", function() {
+
+function setBGColor() {
+  var h = document.getElementById("rangeH").value;
+  var s = document.getElementById("rangeS").value;
+  var l = document.getElementById("rangeL").value;
+  document.body.style.backgroundColor = "hsl(" + h + ", " + s + "%, " + l + "%)";
+}
+document.body.addEventListener("change", setBGColor, false);
+
+}, false);
+</script>
+</body>
+</html>
