@@ -55,6 +55,7 @@ function inputRange(masterElement) {
     "step": masterElement.getAttribute("step"),
   });
   function roundValue(value) {
+    var step = masterElement.step;
     if (typeof step === "string" && step.toLowerCase() === "any") {
       return value;
     }
