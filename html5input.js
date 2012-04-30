@@ -108,9 +108,12 @@ function inputRange(masterElement) {
     var newValue = Math.min(maxNum, Math.max(minNum, value)).toString();
     var prevValue = masterElement.value;
     if (newValue !== prevValue) {
+      var inputEvent = document.createEvent("MutationEvent");
+      inputEvent.initMutationEvent("input", true, false, masterElement, prevValue, newValue, "value", MutationEvent.MODIFICATION);
       var changeEvent = document.createEvent("MutationEvent");
       changeEvent.initMutationEvent("change", true, false, masterElement, prevValue, newValue, "value", MutationEvent.MODIFICATION);
       masterElement.value = newValue;
+      masterElement.dispatchEvent(inputEvent);
       masterElement.dispatchEvent(changeEvent);
     }
   }
